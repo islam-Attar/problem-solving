@@ -11,9 +11,10 @@
 
 const findMax = (arr)=>{
     let max = arr[0];
-    arr = [12, 32, 22, 45, 78, 12, 50];
-    for(var i = 1; i< arr.length; i++){
-      if(arr[i] > max){
+    
+    for(var i = 1; i < arr.length; i++){
+      if(arr[i] > max)
+      {
         max = arr[i];   
       }
      }
@@ -30,8 +31,14 @@ const findMax = (arr)=>{
 // ------------------------
 
 const sumNums = (arr)=>{
-    let sum;
-    // write your code here
+    let sum = 0;
+    for (var i = 0; i <= arr.length; i++)
+    {
+    if(typeof arr[i] == 'number')
+    {
+      sum = arr[i] + sum;
+    }
+  }
     return sum;
 }
 
@@ -44,7 +51,12 @@ const sumNums = (arr)=>{
 // 
 // ------------------------
 const reverseArray = (arr)=>{
-    // write your code here
+  var array = [];
+  while (arr.length)
+    {
+      array.push(arr.pop());
+    }
+    return array;
 }
 
 module.exports = {findMax , sumNums, reverseArray};
