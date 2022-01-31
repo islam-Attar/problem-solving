@@ -17,11 +17,14 @@
 
 const arrInc = (arr) => {
     let result = [];
-    arr.forEach((element, index) => {
-     result[index] = element + 10;
+    let nO = 0;
+    arr.forEach(element => {
+        nO = element + 10;
+        result.push(nO)
     });
     return result;
 }
+
 
 
 // 2) ---------------------
@@ -33,8 +36,15 @@ const arrInc = (arr) => {
 // 
 // ------------------------
 const roundDecimals = (arr) => {
-    // write your code here
+    let decArr = [];
+    let nO = 0;
+    arr.forEach(element => {
+        nO = Math.round(element);
+        decArr.push(nO);
+    });
+    return decArr;
 }
+
 
 // 3) ---------------------
 // 
@@ -101,7 +111,22 @@ const roundDecimals = (arr) => {
 
 // ------------------------
 const employeesBonus = (arr) => {
-    // write your code here
+    let newSalary = 0;
+    arr.forEach(element => {
+            let salary = element.salary;
+
+            if (element.workHours > 8) {
+                newSalary = parseFloat(salary.replace(/\$|,/g, '')) + 100;
+            }
+            //"More than"= ( workHours = 8 ||  workHours < 8)
+            if (element.workHours <= 8) {
+                newSalary = parseFloat(salary.replace(/\$|,/g, '')) + 50;
+            }
+            element.salary = newSalary + "$";
+        }
+
+    );
+    return arr;
 }
 
 // 4) ---------------------
