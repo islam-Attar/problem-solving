@@ -85,41 +85,43 @@ const objLat = (obj) => {
 const cvFormatter = (arr) => {
 
     var newArr = [];
+
+
+
+    for (let i = 0; i < arr.length; i++) {
+            var fullName;
+        if (arr[i].yearsOfExperience > 1) {
+            if(arr[i].firstName !== null && arr[i].lastName !== null)
+                fullName = arr[i].firstName +" "+arr[i].lastName;
+            
+            if (arr[i].firstName == null) {
+                 
+                fullName =arr[i].lastName   ;
+            }
+            if (arr[i].lastName == null) {
+               
+                fullName =arr[i].firstName;
+            }
+          
+
+
+            var newObj = {
+                fullName: " ",
+                tech: "",
+            }
+            newObj.fullName = fullName
+            newObj.tech = arr[i].tech
+                newArr.push(newObj);
+
+        }
+        
+        
+    };
+    return newArr
+};
+
+
     
-    for(let i = 0; i < arr.length; i++)
-
-{  
-    var fullName;
-    if(arr[i].yearsOfExperience > 1)
-    {
-  if(arr[i].firstName != null && arr[i].lastName != null )
-    fullName = arr[i].firstName +" "+ arr[i].lastName;  
-
-
-  else if(arr[i].firstName == null)
-    fullName= arr[i].lastName;
-  
-
-  else if(arr[i].lastName == null)
-    fullName = arr[i].firstName;
-
- var newObj = {
-    fullName: " ",
-    tech: " ",
-      }
-   }
-
-
-
-
-newObj.fullName = fullName;
-newObj.tech = arr[i].tech
-newArr.push(newObj);
-
-}
-
-return newArr;
-  };
 
 // 3) ---------------------
 //
@@ -142,9 +144,52 @@ return newArr;
 
 // ------------------------
 const applicationsStatics = (arr) => {
-    // i kept trying for so many hours but didnt work
-};
 
+    let result = {
+        python_Devs: 0,
+        javaScript_Devs: 0,
+        dotNet_Devs: 0,
+        java_Devs: 0,
+        totalApplicants: 0,
+        rejectedApplicants: 0,
+    }
+
+    arr.forEach(element => {
+
+
+        if (((element.firstName == null) && (element.lastName == null)) || (element.yearsOfExperience <= 1)) {
+            result.rejectedApplicants++;
+
+        }
+
+        if (element.tech == "Python") {
+            result.python_Devs++;
+            result.totalApplicants++;
+        }
+
+        if (element.tech == "JS") {
+            result.javaScript_Devs++;
+            result.totalApplicants++;
+        }
+
+
+        if (element.tech == ".Net") {
+            result.dotNet_Devs++;
+            result.totalApplicants++;
+        }
+
+        if (element.tech == "Java") {
+            result.java_Devs++;
+            result.totalApplicants++;
+
+        }
+
+
+    });
+
+    return result;
+
+};
 // 4) ---------------------
 //
 //  A Certain School principal wants to calculate the average score of each class in each grade in the school
@@ -267,7 +312,16 @@ let data = {
 //  2- You need to round the average to the nearest lower number 
 
 const classesAvg = (data) => {
-    // write your code here
-};
+    for(let i=0 ; i < data.grades.length ; i++ ){
+        for(let j=0 ; j < data.grades[i].classes.length ; j++){
+            let sum = 0 ;
+            for(let k=0 ; k < data.grades[i].classes[j].classScores.length ; k++ ){
+                sum = sum+data.grades[i].classes[j].classScores[k]; 
+            }
+          data.grades[i].classes[j].avg= Math.floor(sum/ data.grades[i].classes[j].classScores.length);
+        }
+    }return data;
+}
+
 
 module.exports = { objLat, cvFormatter, applicationsStatics, classesAvg };
